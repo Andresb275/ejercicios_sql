@@ -1,0 +1,20 @@
+/*
+EJERCICIO 20
+Objetivo: Análisis por categoría.
+
+Explicación:
+Ingreso total = SUM(cantidad * precio_unitario)
+Unidades vendidas = SUM(cantidad)
+Ticket promedio = ingreso total / número de ventas distintas
+*/
+
+SELECT 
+    p.categoria,
+    SUM(dv.cantidad * dv.precio_unitario) AS ingreso_total,
+    SUM(dv.cantidad) AS unidades_vendidas,
+    SUM(dv.cantidad * dv.precio_unitario) 
+        / COUNT(DISTINCT v.id_venta) AS ticket_promedio
+FROM detalle_ventas dv
+JOIN productos p ON dv.id_producto = p.id_producto
+JOIN ventas v ON dv.id_venta = v.id_venta
+GROUP BY p.categoria;
