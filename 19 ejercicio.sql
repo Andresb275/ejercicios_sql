@@ -1,0 +1,15 @@
+/*
+EJERCICIO 19
+Objetivo: Producto más vendido en unidades.
+
+Explicación:
+Se suma la columna cantidad agrupando por producto.
+*/
+
+SELECT p.nombre,
+       SUM(dv.cantidad) AS total_unidades
+FROM detalle_ventas dv
+JOIN productos p ON dv.id_producto = p.id_producto
+GROUP BY dv.id_producto
+ORDER BY total_unidades DESC
+LIMIT 1;
